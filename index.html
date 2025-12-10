@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Breeze Cars - Seychelles Island Car Rentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0077be;
+            --secondary: #00a8cc;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --sand: #f4e9d8;
+            --tropical: #2ecc71;
+            --ocean: #1a5276;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 60px;
+            border-radius: 8px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--sand);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover;
+            color: white;
+            padding: 4rem 0;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .hero-text h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn:hover {
+            background: #e55555;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--tropical);
+        }
+        
+        .btn-secondary:hover {
+            background: #27ae60;
+        }
+        
+        /* Booking Form */
+        .booking-form {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            color: var(--dark);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .booking-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--ocean);
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .car-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .car-option {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .car-option:hover, .car-option.selected {
+            border-color: var(--primary);
+            background: rgba(0, 119, 190, 0.1);
+        }
+        
+        .car-option img {
+            height: 60px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .car-option h4 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .car-option p {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .booking-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Why Choose Us */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* Fleet Section */
+        .fleet {
+            background-color: var(--sand);
+        }
+        
+        .cars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .car-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .car-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .car-info {
+            padding: 1.5rem;
+        }
+        
+        .car-info h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .car-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .availability {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .availability span {
+            background: var(--tropical);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .step {
+            position: relative;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* Island Experience */
+        .island-exp {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1533106723333-31c65762e05b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover;
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .island-exp h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .island-exp p {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            background-color: var(--light);
+        }
+        
+        .dashboard-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .dashboard-feature {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .dashboard-feature i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-form {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-text h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .car-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="https://i.postimg.cc/zX21DBtr/Cool-Breeze-Cars-FINAL-JPEG.jpg">
+                <h1>Cool Breeze Cars</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#fleet">Our Fleet</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h2>Explore Mahe Island with Comfort & Freedom</h2>
+                <p>Reliable, affordable, and easy-to-book car rentals—perfect for your island adventure.</p>
+                <p>Pick your dates. Choose your car. Start exploring.</p>
+                <a href="#fleet" class="btn">Book Your Car</a>
+            </div>
+            
+            <div class="booking-form">
+                <h3>Book Your Island Adventure</h3>
+                <form id="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pickup-date">Pickup Date</label>
+                            <input type="date" id="pickup-date" name="pickup-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="return-date">Return Date</label>
+                            <input type="date" id="return-date" name="return-date" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Select Your Vehicle</label>
+                        <div class="car-options">
+                            <div class="car-option" data-car="taisor">
+                                <img src="https://i.postimg.cc/bJMpCwKT/Toyota-Taisor.png" alt="Toyota Taisor">
+                                <h4>Toyota Taisor</h4>
+                                <p>Compact SUV</p>
+                            </div>
+                            <div class="car-option" data-car="brezza">
+                                <img src="https://i.postimg.cc/VLwL3dJ4/Suzuki-Brezza.png" alt="Suzuki Brezza">
+                                <h4>Suzuki Brezza</h4>
+                                <p>Stylish SUV</p>
+                            </div>
+                            <div class="car-option" data-car="hyryder">
+                                <img src="https://i.postimg.cc/hPNcbv9K/Toyota-Hyryder.png" alt="Toyota Hyryder">
+                                <h4>Toyota Hyryder</h4>
+                                <p>Premium SUV</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-actions">
+                        <button type="button" class="btn btn-secondary">Check Availability</button>
+                        <button type="submit" class="btn">Book Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Us</h2>
+                <p>Your Trusted Car Rental on Mahe, Seychelles</p>
+            </div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+                We make island travel simple. With real-time availability, secure online payments, and a fleet built for Seychelles roads, you can start your journey with confidence.
+            </p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Instant Online Booking</h3>
+                    <p>Check availability and reserve your car in minutes.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-credit-card"></i>
+                    <h3>Flexible Payment Options</h3>
+                    <p>Secure credit/debit card checkout.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-car"></i>
+                    <h3>Island-Ready Vehicles</h3>
+                    <p>Comfortable, fuel-efficient SUVs perfect for Seychelles terrain.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>Local Support</h3>
+                    <p>Friendly island assistance whenever you need it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Fleet -->
+    <section id="fleet" class="fleet">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Fleet</h2>
+                <p>Reliable Cars for Every Traveler</p>
+            </div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+                Choose from our well-maintained compact SUVs—ideal for scenic drives, beaches, and hill routes across Mahe.
+            </p>
+            
+            <div class="cars">
+                <div class="car-card">
+                    <div class="car-img" style="background-image: url('https://i.postimg.cc/bJMpCwKT/Toyota-Taisor.png');"></div>
+                    <div class="car-info">
+                        <h3>Toyota Taisor</h3>
+                        <p>Compact SUV with modern design and fuel efficiency</p>
+                        <div class="availability">
+                            <span>3 available</span>
+                            <a href="#" class="btn" style="padding: 8px 20px; font-size: 0.9rem;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="car-card">
+                    <div class="car-img" style="background-image: url('https://i.postimg.cc/VLwL3dJ4/Suzuki-Brezza.png');"></div>
+                    <div class="car-info">
+                        <h3>Suzuki Brezza</h3>
+                        <p>Stylish compact SUV perfect for island adventures</p>
+                        <div class="availability">
+                            <span>3 available</span>
+                            <a href="#" class="btn" style="padding: 8px 20px; font-size: 0.9rem;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="car-card">
+                    <div class="car-img" style="background-image: url('https://i.postimg.cc/hPNcbv9K/Toyota-Hyryder.png');"></div>
+                    <div class="car-info">
+                        <h3>Toyota Hyryder</h3>
+                        <p>Premium SUV with advanced features and comfort</p>
+                        <div class="availability">
+                            <span>1 available</span>
+                            <a href="#" class="btn" style="padding: 8px 20px; font-size: 0.9rem;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="btn">View All Cars</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Simple, Stress-Free Booking</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Select Dates</h3>
+                    <p>Choose your pickup & return dates using our real-time calendar.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Pick Your Car</h3>
+                    <p>Only available vehicles for your dates will be shown.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Book Securely</h3>
+                    <p>Pay online with your card or preferred payment method.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Drive & Explore</h3>
+                    <p>Pick up your car and enjoy the beauty of Seychelles.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="btn">Start Your Reservation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Island Experience -->
+    <section class="island-exp">
+        <div class="container">
+            <h2>Island-Inspired Experience</h2>
+            <p>A Website Designed for Seychelles</p>
+            <p style="max-width: 800px; margin: 0 auto;">
+                We've built our service with the island lifestyle in mind: tropical visuals, smooth navigation, and a modern interface that feels as refreshing as the beaches of Mahe.
+            </p>
+            <p style="max-width: 800px; margin: 0 auto;">
+                Whether you're here for vacation or business, we ensure your transport is the last thing you worry about.
+            </p>
+        </div>
+    </section>
+
+    <!-- Customer Dashboard -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <div class="section-title">
+                <h2>Customer Dashboard</h2>
+                <p>Manage Your Bookings with Ease</p>
+            </div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+                Create an account to access a personal dashboard where you can:
+            </p>
+            
+            <div class="dashboard-features">
+                <div class="dashboard-feature">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>View Upcoming Rentals</h3>
+                </div>
+                <div class="dashboard-feature">
+                    <i class="fas fa-edit"></i>
+                    <h3>Modify Reservations</h3>
+                </div>
+                <div class="dashboard-feature">
+                    <i class="fas fa-times-circle"></i>
+                    <h3>Cancel if Needed</h3>
+                </div>
+                <div class="dashboard-feature">
+                    <i class="fas fa-history"></i>
+                    <h3>Booking History</h3>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 2rem; color: #666;">
+                Guest checkout is also available—no account required.
+            </p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Explore Mahe?</h2>
+            <p>Reliable cars. Transparent pricing. Instant confirmation.</p>
+            <a href="#fleet" class="btn">Book Your Island Adventure</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">
+                <img src="https://i.postimg.cc/zX21DBtr/Cool-Breeze-Cars-FINAL-JPEG.jpg" style="height: 40px;">
+                <h3>Cool Breeze Cars</h3>
+            </div>
+            <p>&copy; 2025 Cool Breeze Cars. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-tripadvisor"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('pickup-date').setAttribute('min', today);
+        document.getElementById('return-date').setAttribute('min', today);
+        
+        // Update return date minimum when pickup date changes
+        document.getElementById('pickup-date').addEventListener('change', function() {
+            const pickupDate = new Date(this.value);
+            pickupDate.setDate(pickupDate.getDate() + 1);
+            const minReturnDate = pickupDate.toISOString().split('T')[0];
+            document.getElementById('return-date').setAttribute('min', minReturnDate);
+            
+            // Clear return date if it's before the new minimum
+            if (document.getElementById('return-date').value && document.getElementById('return-date').value < minReturnDate) {
+                document.getElementById('return-date').value = '';
+            }
+        });
+        
+        // Car selection
+        const carOptions = document.querySelectorAll('.car-option');
+        carOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options
+                carOptions.forEach(opt => opt.classList.remove('selected'));
+                // Add selected class to clicked option
+                this.classList.add('selected');
+            });
+        });
+        
+        // Form submission
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const pickupDate = document.getElementById('pickup-date').value;
+            const returnDate = document.getElementById('return-date').value;
+            const selectedCar = document.querySelector('.car-option.selected');
+            
+            if (!pickupDate || !returnDate) {
+                alert('Please select both pickup and return dates.');
+                return;
+            }
+            
+            if (!selectedCar) {
+                alert('Please select a vehicle.');
+                return;
+            }
+            
+            const carName = selectedCar.querySelector('h4').textContent;
+            
+            // In a real application, this would submit to a server
+            alert(`Booking confirmed!\n\nVehicle: ${carName}\nPickup: ${pickupDate}\nReturn: ${returnDate}\n\nThank you for choosing Cool Breeze Cars!`);
+        });
+        
+        // Check availability button
+        document.querySelector('.btn-secondary').addEventListener('click', function() {
+            const pickupDate = document.getElementById('pickup-date').value;
+            const returnDate = document.getElementById('return-date').value;
+            
+            if (!pickupDate || !returnDate) {
+                alert('Please select both pickup and return dates.');
+                return;
+            }
+            
+            // In a real application, this would check availability on a server
+            alert('Checking availability...\n\nAll vehicles are available for your selected dates!');
+        });
+    </script>
+</body>
+</html>
